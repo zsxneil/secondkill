@@ -41,8 +41,8 @@ public class SeckillApplicationTests {
     }
 
     @Test
-    public void queueNumTest() {
-        redisTemplate.opsForValue().set(Constants.REDIS_PREFIX + secKillId + ":" + goodsId + ":queuenum", 0);
+    public void goodsStockTest() {
+        redisTemplate.opsForValue().set(Constants.REDIS_PREFIX + secKillId + ":" + goodsId + ":stock", 10);
     }
 
     @Test
