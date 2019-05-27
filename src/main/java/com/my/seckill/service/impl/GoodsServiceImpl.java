@@ -59,7 +59,10 @@ public class GoodsServiceImpl implements GoodsService {
                 ret.put("status", 1);
                 return ret;
             }
-            redisTemplate.opsForSet().add(Constants.REDIS_PREFIX + secKillId + ":" + goodsId + ":users", userId);
+            long successCount = redisTemplate.opsForSet().add(Constants.REDIS_PREFIX + secKillId + ":" + goodsId + ":users", userId);
+            if (successCount <= 0) {
+                redisTemplate.opsForValue().increment(Constants.REDIS_PREFIX + secKillId + ":" + goodsId + ":stock", 1);
+            }
             //发送mq消息，启动下订单动作
             //并减库存 ---库存数量也缓存在redis中，使用incr原子操作减库存
         }

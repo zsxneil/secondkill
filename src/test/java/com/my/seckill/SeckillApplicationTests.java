@@ -77,7 +77,12 @@ public class SeckillApplicationTests {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                JSONObject ret = goodsService.secKill(secKillId, goodsId, finalI);
+                if (finalI < 10) {
+                    JSONObject ret = goodsService.secKill(secKillId, goodsId, 1L);
+                } else {
+                    JSONObject ret = goodsService.secKill(secKillId, goodsId, finalI);
+                }
+
 //                log.info(ret.toJSONString());
             });
             futureList.add(future);
